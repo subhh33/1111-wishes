@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout – 11:11 Wishes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><span>11:11 Wishes</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#menu">Menu</a></li>
+        <li><a href="index.html#reviews">Review</a></li>
+        <li><a href="index.html#contact">Book</a></li>
+        <li><a href="cart.html" class="cart-link">Cart<span class="cart-count" id="cart-count">0</span></a></li>
+      </ul>
+    </nav>
+    <!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+    <a href="index.html#contact" class="btn">Book Your Art</a>
+  </header>
+
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+    <form id="checkout-form" class="checkout-form">
+      <input type="text" id="full-name" placeholder="Full Name" required>
+      <input type="text" id="address" placeholder="Address" required>
+      <input type="text" id="city" placeholder="City" required>
+      <input type="text" id="state" placeholder="State" required>
+      <input type="text" id="zip" placeholder="ZIP/Postal Code" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <div class="payment-options">
+        <label class="payment-option">
+          <input type="radio" name="payment-method" value="cod" checked>
+          <span>Cash on Delivery</span>
+        </label>
+        <label class="payment-option">
+          <input type="radio" name="payment-method" value="upi">
+          <span>UPI Payment</span>
+        </label>
+      </div>
+      <button type="submit" class="btn">Place Order</button>
+    </form>
+    <div class="upi-section" id="upi-section">
+      <p id="upi-instructions">Please scan the QR code below to complete your payment. After you have paid, click the button to confirm.</p>
+      <img src="../IMG_952AC3ACBE1B-1.jpeg" alt="UPI QR Code">
+      <p id="upi-id-text">UPI ID: iwannabackmylife-1@okhdfcbank</p>
+      <p id="upi-amount"></p>
+      <a id="upi-link" href="#" class="btn" style="margin-bottom:1rem; display:none;" target="_blank">Pay via UPI App</a>
+      <button id="payment-done" class="btn">Payment Done</button>
+    </div>
+    <div class="order-summary" id="order-summary"></div>
+  </div>
+
+  <footer>
+    <p>© 2025 11:11 Wishes. All rights reserved.</p>
+    <p>Patna, Bihar, India</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Populate cart count on checkout page
+      updateCartCount();
+      const form = document.getElementById('checkout-form');
+      const upiSection = document.getElementById('upi-section');
+      const orderSummary = document.getElementById('order-summary');
+      const paymentDoneBtn = document.getElementById('payment-done');
+      const upiAmountEl = document.getElementById('upi-amount');
+      const upiLinkEl = document.getElementById('upi-link');
+
+      // Compute total and populate UPI payment information
+      function updateUpiInfo() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let total = 0;
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+        });
+        total = parseFloat(total.toFixed(2));
+        // Display amount text
+        if (upiAmountEl) {
+          if (total > 0) {
+            upiAmountEl.textContent = `Please pay ₹${total.toFixed(2)} to the UPI ID above.`;
+          } else {
+            upiAmountEl.textContent = '';
+          }
+        }
+        // Create dynamic UPI link for apps
+        if (upiLinkEl) {
+          const upiUrl = `upi://pay?pa=iwannabackmylife-1@okhdfcbank&pn=1111%20Wishes&am=${total}&cu=INR`;
+          upiLinkEl.href = upiUrl;
+          if (total > 0) {
+            upiLinkEl.style.display = 'inline-block';
+          } else {
+            upiLinkEl.style.display = 'none';
+          }
+        }
+      }
+      // Call once on load
+      updateUpiInfo();
+
+      // Listen for payment method change
+      document.querySelectorAll('input[name="payment-method"]').forEach(function(el) {
+        el.addEventListener('change', function() {
+          if (this.value === 'upi') {
+            upiSection.style.display = 'block';
+          } else {
+            upiSection.style.display = 'none';
+          }
+        });
+      });
+
+      // On form submit (for COD orders)
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+        if (paymentMethod === 'upi') {
+          // Show UPI section for payment
+          upiSection.style.display = 'block';
+        } else {
+          // Place order directly (COD)
+          placeOrder('Cash on Delivery');
+        }
+      });
+
+      paymentDoneBtn.addEventListener('click', function() {
+        placeOrder('UPI Payment');
+      });
+
+      function placeOrder(paymentMethod) {
+        const fullName = document.getElementById('full-name').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+        const phone = document.getElementById('phone').value;
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let message = `New order from ${fullName}. Items: `;
+        let total = 0;
+        cart.forEach(item => {
+          message += `${item.name} (x${item.quantity}), `;
+          total += item.price * item.quantity;
+        });
+        message += `Total: ₹${total.toFixed(2)}.`;
+        message += `\nAddress: ${address}, ${city}, ${state}, ${zip}. Phone: ${phone}. Payment: ${paymentMethod}.`;
+        // Display order summary
+        orderSummary.innerHTML = `Thank you, ${fullName}! Your order has been placed successfully. We will get in touch with you soon.`;
+        // Clear cart
+        localStorage.removeItem('cart');
+        updateCartCount();
+        // Create mailto and WhatsApp links (these open in new tab when clicked)
+        const whatsappLink = `https://api.whatsapp.com/send?phone=918825394717&text=${encodeURIComponent(message)}`;
+        const mailtoLink = `mailto:subhash13333.ss@gmail.com?subject=New%20Order&body=${encodeURIComponent(message)}`;
+        // Automatically open links in new tabs to send notification (requires user interaction)
+        window.open(whatsappLink, '_blank');
+        window.open(mailtoLink, '_blank');
+      }
+    });
+  </script>
+</body>
+</html>

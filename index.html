@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11:11 Wishes – Handcrafted Magic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span>11:11 Wishes</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#reviews">Review</a></li>
+        <li><a href="#contact">Book</a></li>
+        <li><a href="cart.html" class="cart-link">Cart<span class="cart-count" id="cart-count">0</span></a></li>
+      </ul>
+    </nav>
+    <!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+    <a href="#contact" class="btn">Book Your Art</a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Handcrafted Magic For Your Space</h1>
+      <p>Bring warmth, soul and beauty into your home with our handcrafted candles, art and decor. Each piece is made with love and designed to spark joy.</p>
+      <a href="#menu" class="btn">Buy Now</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-title">Why Choose Us</div>
+    <div class="about">
+      <img src="../about-img.png" alt="Founders">
+      <div class="about-text">
+        <h2>What Makes Our Creations Special!</h2>
+        <p>Each piece is handcrafted with love, blending traditional art with modern elegance. From earthy clay textures to soothing candle aromas, our products bring warmth, soul and beauty into your space.</p>
+        <p>Designed to spark joy and serenity in every corner of your home.</p>
+        <a href="about.html" class="btn">Read More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu">
+    <div class="section-title">Popular Menu</div>
+    <div class="menu-grid" id="menu-grid">
+      <!-- Products will be inserted here by JavaScript -->
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews">
+    <div class="section-title">What People Say</div>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Absolutely love the scent and the look. It's calming and aesthetic!</p>
+        <div class="client">Riya Sharma<br><small>Satisfied Client</small></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>The Lippan artwork is so detailed and beautiful. Feels truly handmade.</p>
+        <div class="client">Ankit Mehta<br><small>Satisfied Client</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bulk Order / Contact Section -->
+  <section id="contact">
+    <div class="section-title">Bulk Order</div>
+    <div class="contact">
+      <form id="contact-form">
+        <input type="text" id="contact-name" placeholder="Name" required>
+        <input type="email" id="contact-email" placeholder="Email" required>
+        <input type="text" id="contact-number" placeholder="Number" required>
+        <textarea id="contact-message" rows="4" placeholder="Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 11:11 Wishes. All rights reserved.</p>
+    <p>Patna, Bihar, India</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

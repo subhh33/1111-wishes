@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart – 11:11 Wishes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><span>11:11 Wishes</span></div>
+    <nav>
+      <ul>
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#menu">Menu</a></li>
+        <li><a href="index.html#reviews">Review</a></li>
+        <li><a href="index.html#contact">Book</a></li>
+        <li><a href="cart.html" class="cart-link">Cart<span class="cart-count" id="cart-count">0</span></a></li>
+      </ul>
+    </nav>
+    <!-- Theme toggle button -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+    <a href="index.html#contact" class="btn">Book Your Art</a>
+  </header>
+
+  <div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items"></div>
+    <div class="cart-summary" id="cart-summary"></div>
+  </div>
+
+  <footer>
+    <p>© 2025 11:11 Wishes. All rights reserved.</p>
+    <p>Patna, Bihar, India</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Render cart on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCart();
+    });
+  </script>
+</body>
+</html>

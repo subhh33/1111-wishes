@@ -1,0 +1,486 @@
+/* Global styles for the candle‑store website */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/*
+  Colour palette and theme variables
+
+  The website uses CSS custom properties to define a flexible colour palette
+  for both light and dark themes.  The default (light) theme uses crisp
+  whites and deep blacks with a warm gold accent to evoke a premium feel.
+  Switching to dark mode simply swaps out the base colours while keeping
+  accent colours consistent.  These variables are referenced throughout
+  the stylesheet so that updating the look and feel only requires changing
+  the values here.
+*/
+
+:root {
+  /* Base background and text colours */
+  --bg: #ffffff;                 /* primary page background */
+  --text: #111111;              /* primary text colour */
+  --primary: #000000;           /* high emphasis text colour */
+  --secondary: #ffffff;         /* secondary surfaces (e.g. headers) */
+
+  /* Accent colour used for call‑to‑action buttons and highlights */
+  --accent: #D4AF37;            /* warm gold accent */
+  --btn-hover: #b79530;         /* slightly darker gold for hover states */
+
+  /* Card surfaces and shadows */
+  --card-bg: #f9f9f9;           /* background for cards/panels */
+  --shadow: rgba(0, 0, 0, 0.1); /* subtle drop shadow */
+
+  /* Subtle text and border colours */
+  --text-muted: #555555;        /* muted text for paragraphs */
+  --border-color: #dddddd;      /* borders on card elements */
+}
+
+/* Dark theme overrides.  When the root element has the data-theme="dark"
+   attribute set, these values will override the defaults above. */
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --text: #eaeaea;
+  --primary: #ffffff;
+  --secondary: #0a0a0a;
+  --accent: #D4AF37;
+  --btn-hover: #b79530;
+  --card-bg: #1a1a1a;
+  --shadow: rgba(255, 255, 255, 0.05);
+  --text-muted: #aaaaaa;
+  --border-color: #333333;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  /* Inherit from CSS variables defined in :root or [data-theme] */
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navigation bar */
+header {
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo span {
+  font-weight: 700;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav ul li a {
+  font-weight: 500;
+  transition: color 0.3s;
+  color: var(--text);
+}
+
+nav ul li a:hover {
+  color: var(--accent);
+}
+
+.btn {
+  background-color: var(--accent);
+  color: var(--secondary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--btn-hover);
+}
+
+/* Hero section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 2rem;
+  /* Remove decorative image for a minimal, luxurious feel */
+  background-color: var(--bg);
+  min-height: 60vh;
+}
+
+.hero .hero-text {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+/* Section headings */
+section {
+  padding: 4rem 2rem;
+  background-color: var(--bg);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  position: relative;
+  color: var(--primary);
+}
+
+.section-title::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background-color: var(--accent);
+  display: block;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+/* About section */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.about img {
+  flex: 1 1 300px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+}
+
+.about .about-text {
+  flex: 1 1 350px;
+}
+
+.about .about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about .about-text p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Menu section */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.menu-item {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px var(--shadow);
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item p {
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.menu-item .price {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.menu-item button {
+  margin-top: 1rem;
+  align-self: start;
+}
+
+/* Reviews */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.review {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.review .stars {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.review p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.review .client {
+  font-weight: 600;
+}
+
+/* Contact / Bulk order */
+.contact {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input fields in the contact form */
+.contact form input,
+.contact form textarea {
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.contact form button {
+  margin-top: 0.5rem;
+  align-self: flex-start;
+}
+
+/* Footer */
+footer {
+  background-color: var(--secondary);
+  padding: 2rem 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--text);
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+/* Cart badge on header */
+.cart-link {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: var(--accent);
+  /* Use primary colour so the number contrasts with the badge in both themes */
+  color: var(--primary);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+/* Cart page */
+.cart-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item h4 {
+  font-size: 1.1rem;
+}
+
+.cart-item .item-price {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cart-summary {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.cart-summary h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+/* Checkout page */
+.checkout-container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.payment-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.payment-option input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Inputs on the checkout form reuse the same styling as the contact form */
+.checkout-form input {
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.upi-section {
+  display: none;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.upi-section img {
+  max-width: 300px;
+}
+
+.order-summary {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Theme toggle button located in the header */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--accent);
+}
+
+/* Responsive adjustments for smaller viewports */
+@media (max-width: 768px) {
+  /* Stack hero content vertically on small screens */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero .hero-text {
+    max-width: 100%;
+  }
+  /* Stack about section vertically and centre align */
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about img {
+    max-width: 100%;
+  }
+  /* Allow navigation items to wrap and centre on small screens */
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  nav ul li {
+    margin: 0.5rem 0;
+  }
+}
