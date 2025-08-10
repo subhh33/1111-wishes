@@ -28,13 +28,13 @@ const products = [
     id: 5,
     name: 'Our Special Frame',
     description: 'Handcrafted frames perfect for your cherished photos.',
-    price: 500
+    price: 10
   },
   {
     id: 6,
     name: 'Based On Your Demand',
     description: 'Bespoke art and products tailored just for you.',
-    price:500
+    price:5
   }
 ];
 
